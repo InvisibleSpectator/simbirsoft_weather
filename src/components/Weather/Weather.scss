@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&display=swap');
+$basic-dark-color: #212121; //color of the spinner
+$border-width: 4px; //width of spinners border
+$basic-spinner-dimensions: 125px; //width and height of spinner
+$main-spinner-dimensions: $basic-spinner-dimensions - $border-width * 2; //width and height of bigger circle
+$small-spinner-dimensions: $main-spinner-dimensions * 0.7; //width and height of smaller circle
+
+.background {
+  position: absolute;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2000;
+
+  background-size: cover;
+  
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1014px;
+  padding: 10px;
+  margin-top: 10px;
+  box-shadow: 0px 0px 31px 9px rgba(0, 0, 0, 0.21);
+
+  display: grid;
+
+  grid-template-areas:
+    "searchbar controls"
+    "city temperature"
+    "description temperature"
+    "forecast forecast"
+  ;
+
+  grid-template-columns: 1fr 300px;
+  grid-template-rows: 60px 150px 150px 1fr;
+
+  font-family: 'Exo 2', sans-serif;
+
+  @media (max-width:930px) {
+    grid-template-areas:
+      "searchbar controls"
+      "city temperature"
+      "description description"
+      "forecast forecast"
+    ;
+  }
+
+  @media (max-width:630px) {
+    grid-template-areas:
+      "searchbar"
+      "controls"
+      "city"
+      "temperature"
+      "description"
+      "forecast"
+    ;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 40px 100px 100px auto 1fr;
+  }
+}
+
+.spinner-contaner {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.spinner {
+  position: relative;
+  width: $basic-spinner-dimensions;
+  height: $basic-spinner-dimensions;
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 50%;
+  }
+}
+
+.spinner.spinner-4 {
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  &:before {
+    width: $main-spinner-dimensions;
+    height: $main-spinner-dimensions;
+    border-color: $basic-dark-color;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+
+  &:after {
+    width: $small-spinner-dimensions * 0.2;
+    height: $small-spinner-dimensions * 0.2;
+    border-width: $border-width - 1;
+    border-color: $basic-dark-color;
+    top: $main-spinner-dimensions / 2 - $border-width * 2;
+    left: 0;
+    overflow: hidden;
+    transform-origin: $main-spinner-dimensions / 2 + $border-width;
+    animation: rotate 1.2s linear 0s infinite;
+  }
+}

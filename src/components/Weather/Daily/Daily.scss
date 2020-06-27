@@ -1,0 +1,75 @@
+.daily {
+
+  grid-area: forecast;
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  @media (max-width:375px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (max-width:600px) and (min-width:350px){
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+  }
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 2px solid black;
+  background-color: rgba(239, 239, 239, 0.247);
+  margin-top: 12px;
+  height: fit-content;
+  min-width: 140px;
+
+  @media (max-width:350px) {
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "weekday icon"
+    "temp-night icon"
+    "temp-day icon"
+    ;
+    grid-template-columns: 1fr 100px;
+  }
+
+  &-weekday {
+    font-size: 20px;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    @media (max-width:350px) {
+    grid-area: weekday;
+    justify-self: center;
+    }
+  }
+
+  &-temperature {
+    &--night {
+      color: rgb(44, 44, 44);
+      @media (max-width:350px) {
+        grid-area: temp-night;
+        justify-self: center;
+        }
+    }
+
+    &--day {
+      font-size: 32px;
+      @media (max-width:350px) {
+        grid-area: temp-day;
+        justify-self: center;
+        }
+    }
+  }
+
+  &-icon{
+    @media (max-width:350px) {
+      grid-area: icon;
+      }
+  }
+}
